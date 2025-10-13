@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Copy to Clipboard</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    #copyText {
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <textarea id="copyText" rows="4">This is the text to copy!</textarea>
+  <br>
+  <button onclick="copyToClipboard()">Copy Text</button>
+
+  <script>
+    function copyToClipboard() {
+      const textArea = document.getElementById("copyText");
+      textArea.select();
+      document.execCommand("copy");
+      alert("Copied to clipboard!");
+    }
+  </script>
+
+</body>
+</html>
