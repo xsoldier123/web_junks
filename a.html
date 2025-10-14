@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Link List with Copy</title>
+  <title>Link List</title>
   <style>
     body {
       font-family: sans-serif;
@@ -22,48 +22,109 @@
       font-size: 0.9em;
       cursor: pointer;
     }
+    #linkList {
+      display: none;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 
-  <h2>🔗 Link List</h2>
+  <h2>View Links</h2>
+  <input type="password" id="passwordInput" placeholder="Enter" />
+  <button onclick="checkPassword()">Submit</button>
+
   <div id="linkList"></div>
 
   <script>
+    const correctPassword = "2233";
+
     const linksData = [
+            {
+        "Title": "LesTRubV1.0",
+        "Links": "https://limewire.com/d/VBboE#7jNvfp3UWK"
+      },
+      
       {
-        "Position": 0,
-        "Title": "Google",
-        "Links": "https://www.google.com"
+        "Title": "LesTRubV1.1",
+        "Links": "https://limewire.com/d/It7Ue#C0YB0A9mBf"
+      },
+      
+      {
+        "Title": "EngFv1.0",
+        "Links": "https://limewire.com/d/VBboE#7jNvfp3UWK"
+      },
+      
+      {
+        "Title": "EngCowV1",
+        "Links": "https://abstream.to/hwhlmet1k3fu"
+      },
+      
+      {
+        "Title": "EngCowV1",
+        "Links": "https://abstream.to/e7sz4qm5w6oy"
+      },
+      
+      {
+        "Title": "EngFvF",
+        "Links": "https://abstream.to/5x9q01qh3sqz"
+      },
+      
+      {
+        "Title": "sFilmvC",
+        "Links": "https://hglink.to/1qwpqcs22oix"
+      },
+      
+      {
+        "Title": "sFilmv1.0",
+        "Links": "https://limewire.com/d/EiPHA#auD88C3Zh4"
+      },
+      
+       {
+        "Title": "indFv1",
+        "Links": "https://limewire.com/d/5oKQa#ULArXranhm"
       }
-      // You can add more objects here
+      
     ];
 
-    const container = document.getElementById('linkList');
+    function checkPassword() {
+      const input = document.getElementById('passwordInput').value;
+      if (input === correctPassword) {
+        showLinks();
+      } else {
+        alert("❌ Incorrect password!");
+      }
+    }
 
-    linksData.forEach(item => {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'link-item';
+    function showLinks() {
+      const container = document.getElementById('linkList');
+      container.style.display = 'block';
+      container.innerHTML = ''; // Clear previous content
 
-      const link = document.createElement('a');
-      link.href = item.Links;
-      link.target = '_blank';
-      link.textContent = item.Title;
+      linksData.forEach(item => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'link-item';
 
-      const copyBtn = document.createElement('button');
-      copyBtn.className = 'copy-btn';
-      copyBtn.textContent = '📋 Copy Link';
-      copyBtn.onclick = () => {
-        navigator.clipboard.writeText(item.Links).then(() => {
-          copyBtn.textContent = '✅ Copied!';
-          setTimeout(() => copyBtn.textContent = '📋 Copy Link', 1500);
-        });
-      };
+        const link = document.createElement('a');
+        link.href = item.Links;
+        link.target = '_blank';
+        link.textContent = item.Title;
 
-      wrapper.appendChild(link);
-      wrapper.appendChild(copyBtn);
-      container.appendChild(wrapper);
-    });
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn';
+        copyBtn.textContent = '📋 Copy Link';
+        copyBtn.onclick = () => {
+          navigator.clipboard.writeText(item.Links).then(() => {
+            copyBtn.textContent = '✅ Copied!';
+            setTimeout(() => copyBtn.textContent = '📋 Copy Link', 1500);
+          });
+        };
+
+        wrapper.appendChild(link);
+        wrapper.appendChild(copyBtn);
+        container.appendChild(wrapper);
+      });
+    }
   </script>
 
 </body>
