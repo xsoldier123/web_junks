@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Link List with Copy</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    .link-item {
+      margin-bottom: 10px;
+    }
+    .link-item a {
+      margin-right: 10px;
+      color: blue;
+      text-decoration: underline;
+    }
+    .copy-btn {
+      padding: 4px 8px;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🔗 Link List</h2>
+  <div id="linkList"></div>
+
+  <script>
+    const linksData = [
+      {
+        "Position": 0,
+        "Title": "Google",
+        "Links": "https://www.google.com"
+      }
+      // You can add more objects here
+    ];
+
+    const container = document.getElementById('linkList');
+
+    linksData.forEach(item => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'link-item';
+
+      const link = document.createElement('a');
+      link.href = item.Links;
+      link.target = '_blank';
+      link.textContent = item.Title;
+
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-btn';
+      copyBtn.textContent = '📋 Copy Link';
+      copyBtn.onclick = () => {
+        navigator.clipboard.writeText(item.Links).then(() => {
+          copyBtn.textContent = '✅ Copied!';
+          setTimeout(() => copyBtn.textContent = '📋 Copy Link', 1500);
+        });
+      };
+
+      wrapper.appendChild(link);
+      wrapper.appendChild(copyBtn);
+      container.appendChild(wrapper);
+    });
+  </script>
+
+</body>
+</html>
